@@ -3,10 +3,9 @@ This plugin searches for Telegram bot tokens
 """
 import re
 
-import requests
-
 from ..constants import VerifiedResult
 from detect_secrets.plugins.base import RegexBasedDetector
+from security import safe_requests
 
 
 class TelegramBotTokenDetector(RegexBasedDetector):
@@ -19,7 +18,7 @@ class TelegramBotTokenDetector(RegexBasedDetector):
     ]
 
     def verify(self, secret: str) -> VerifiedResult:  # pragma: no cover
-        response = requests.get(
+        response = safe_requests.get(
             'https://api.telegram.org/bot{}/getMe'.format(
                 secret,
             ),
