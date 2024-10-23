@@ -192,7 +192,7 @@ def verify_aws_secret_access_key(key: str, secret: str) -> bool:  # pragma: no c
         'https://sts.amazonaws.com',
         headers=headers,
         data=body,
-    )
+    timeout=60)
 
     if response.status_code == 403:
         return False
