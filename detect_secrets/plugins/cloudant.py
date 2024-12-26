@@ -6,6 +6,7 @@ import requests
 from ..constants import VerifiedResult
 from ..util.code_snippet import CodeSnippet
 from .base import RegexBasedDetector
+from security import safe_requests
 
 
 class CloudantDetector(RegexBasedDetector):
@@ -120,7 +121,7 @@ def verify_cloudant_key(hostname: str, token: str) -> VerifiedResult:
         )
 
     try:
-        response = requests.get(
+        response = safe_requests.get(
             request_url,
             headers=headers,
         )

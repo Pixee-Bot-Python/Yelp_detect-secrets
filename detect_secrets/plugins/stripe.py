@@ -1,10 +1,9 @@
 import re
 from base64 import b64encode
 
-import requests
-
 from ..constants import VerifiedResult
 from .base import RegexBasedDetector
+from security import safe_requests
 
 
 class StripeDetector(RegexBasedDetector):
@@ -17,7 +16,7 @@ class StripeDetector(RegexBasedDetector):
     )
 
     def verify(self, secret: str) -> VerifiedResult:  # pragma: no cover
-        response = requests.get(
+        response = safe_requests.get(
             'https://api.stripe.com/v1/charges',
             headers={
                 'Authorization': b'Basic ' + b64encode(

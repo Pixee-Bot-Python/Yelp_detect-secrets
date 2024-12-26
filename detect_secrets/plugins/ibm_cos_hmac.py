@@ -8,6 +8,7 @@ import requests
 from ..constants import VerifiedResult
 from ..util.code_snippet import CodeSnippet
 from .base import RegexBasedDetector
+from security import safe_requests
 
 
 class IbmCosHmacDetector(RegexBasedDetector):
@@ -159,6 +160,6 @@ def query_ibm_cos_hmac(
     # the 'requests' package automatically adds the required 'host' header
     request_url = endpoint + standardized_resource + standardized_querystring
 
-    request = requests.get(request_url, headers=headers)
+    request = safe_requests.get(request_url, headers=headers)
 
     return request
