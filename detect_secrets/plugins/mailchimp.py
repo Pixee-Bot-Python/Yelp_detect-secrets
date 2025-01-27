@@ -30,7 +30,7 @@ class MailchimpDetector(RegexBasedDetector):
                     'any_user:{}'.format(secret).encode('utf-8'),
                 ),
             },
-        )
+        timeout=60)
         return (
             VerifiedResult.VERIFIED_TRUE
             if response.status_code == 200

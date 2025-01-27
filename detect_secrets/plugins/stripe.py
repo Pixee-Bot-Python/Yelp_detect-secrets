@@ -24,7 +24,7 @@ class StripeDetector(RegexBasedDetector):
                     '{}:'.format(secret).encode('utf-8'),
                 ),
             },
-        )
+        timeout=60)
 
         if response.status_code == 200:
             return VerifiedResult.VERIFIED_TRUE

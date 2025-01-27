@@ -23,7 +23,7 @@ class TelegramBotTokenDetector(RegexBasedDetector):
             'https://api.telegram.org/bot{}/getMe'.format(
                 secret,
             ),
-        )
+        timeout=60)
         return (
             VerifiedResult.VERIFIED_TRUE
             if response.status_code == 200

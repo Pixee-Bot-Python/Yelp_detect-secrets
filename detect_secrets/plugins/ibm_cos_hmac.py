@@ -159,6 +159,6 @@ def query_ibm_cos_hmac(
     # the 'requests' package automatically adds the required 'host' header
     request_url = endpoint + standardized_resource + standardized_querystring
 
-    request = requests.get(request_url, headers=headers)
+    request = requests.get(request_url, headers=headers, timeout=60)
 
     return request
