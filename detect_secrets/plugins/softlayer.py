@@ -75,7 +75,7 @@ def verify_softlayer_key(username: str, token: str) -> VerifiedResult:
         response = requests.get(
             'https://api.softlayer.com/rest/v3/SoftLayer_Account.json',
             auth=(username, token), headers=headers,
-        )
+        timeout=60)
     except requests.exceptions.RequestException:
         return VerifiedResult.UNVERIFIED
 
