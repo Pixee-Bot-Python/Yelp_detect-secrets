@@ -4,10 +4,9 @@ This plugin searches for Mailchimp keys
 import re
 from base64 import b64encode
 
-import requests
-
 from ..constants import VerifiedResult
 from .base import RegexBasedDetector
+from security import safe_requests
 
 
 class MailchimpDetector(RegexBasedDetector):
@@ -21,7 +20,7 @@ class MailchimpDetector(RegexBasedDetector):
     def verify(self, secret: str) -> VerifiedResult:  # pragma: no cover
         _, datacenter_number = secret.split('-us')
 
-        response = requests.get(
+        response = safe_requests.get(
             'https://us{}.api.mailchimp.com/3.0/'.format(
                 datacenter_number,
             ),
