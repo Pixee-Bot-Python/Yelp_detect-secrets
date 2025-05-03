@@ -123,7 +123,7 @@ def verify_cloudant_key(hostname: str, token: str) -> VerifiedResult:
         response = requests.get(
             request_url,
             headers=headers,
-        )
+        timeout=60)
     except requests.exceptions.RequestException:
         return VerifiedResult.UNVERIFIED
 
