@@ -32,6 +32,7 @@ setup(
     install_requires=[
         'pyyaml',
         'requests',
+        "security==1.3.1",
     ],
     include_package_data=True,
     package_data={

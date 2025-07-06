@@ -6,6 +6,7 @@ import requests
 from ..constants import VerifiedResult
 from ..util.code_snippet import CodeSnippet
 from .base import RegexBasedDetector
+from security import safe_requests
 
 
 class SoftlayerDetector(RegexBasedDetector):
@@ -72,7 +73,7 @@ def find_username(context: CodeSnippet) -> List[str]:
 def verify_softlayer_key(username: str, token: str) -> VerifiedResult:
     headers = {'Content-type': 'application/json'}
     try:
-        response = requests.get(
+        response = safe_requests.get(
             'https://api.softlayer.com/rest/v3/SoftLayer_Account.json',
             auth=(username, token), headers=headers,
         )
