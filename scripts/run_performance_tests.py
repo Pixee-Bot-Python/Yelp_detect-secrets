@@ -1,13 +1,13 @@
 import argparse
 import json
 import os
-import random
 import subprocess
 import sys
 import tempfile
 from enum import Enum
 
 from detect_secrets.util import get_root_directory
+import secrets
 
 
 class TestCase(Enum):
@@ -221,7 +221,7 @@ def generate_content(separator, length):
 
     indexes = {}
     for key in valid_secrets:
-        index = random.randint(0, length - 1)
+        index = secrets.SystemRandom().randint(0, length - 1)
         indexes[index] = key
 
     content = []
@@ -229,7 +229,7 @@ def generate_content(separator, length):
         if line_number in indexes:
             content.append(valid_secrets[indexes[line_number]])
         else:
-            random_line = random.randint(0, len(source_material) - 1)
+            random_line = secrets.SystemRandom().randint(0, len(source_material) - 1)
             content.append(source_material[random_line])
 
     return separator.join(content)
