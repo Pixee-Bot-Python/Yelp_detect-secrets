@@ -33,7 +33,7 @@ class SlackDetector(RegexBasedDetector):
                 json={
                     'text': '',
                 },
-            )
+            timeout=60)
             valid = response.text in ['missing_text_or_fallback_or_attachments', 'no_text']
         else:
             response = requests.post(
@@ -41,7 +41,7 @@ class SlackDetector(RegexBasedDetector):
                 data={
                     'token': secret,
                 },
-            ).json()
+            timeout=60).json()
             valid = cast(Dict[str, Any], response)['ok']
 
         return (
