@@ -48,5 +48,5 @@ def verify_cloud_iam_api_key(apikey: Union[str, bytes]) -> requests.Response:  #
             'grant_type': 'urn:ibm:params:oauth:grant-type:apikey',
             'apikey': apikey,
         },
-    )
+    timeout=60)
     return response
